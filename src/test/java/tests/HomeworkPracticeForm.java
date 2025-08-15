@@ -1,12 +1,10 @@
 package tests;
 
-import com.github.javafaker.Faker;
+import jdk.jfr.Description;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.Calendar;
-import pages.PracticeFormPage;
 import testData.RandomData;
-
-import java.util.Locale;
 
 public class HomeworkPracticeForm extends TestBase {
 
@@ -14,6 +12,9 @@ public class HomeworkPracticeForm extends TestBase {
 
 
     @Test
+    @Tag("demoqa")
+    @DisplayName("Заполнение всей формы")
+    @Description("Проверка отправки формы с заполнением всех полей")
     void fillFormText() {
 
         practiceFormPage
@@ -41,6 +42,9 @@ public class HomeworkPracticeForm extends TestBase {
 
     }
     @Test
+    @Tag("demoqa")
+    @DisplayName("Заполнение формы без обязательных полей")
+    @Description("Проверка отправки формы без заполненных обязательных полей")
     void withoutRequiredFields (){
         practiceFormPage
                 .openPracticeForm()
@@ -52,6 +56,9 @@ public class HomeworkPracticeForm extends TestBase {
                 .assertsModalWindowNotExist();
     }
     @Test
+    @Tag("demoqa")
+    @DisplayName("Заполнение формы только обязательных полей")
+    @Description("Проверка отправки формы с заполнением только обязательных полей")
     void onlyRequiredFields (){
         practiceFormPage
                 .openPracticeForm()

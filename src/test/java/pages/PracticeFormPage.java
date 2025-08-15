@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
@@ -39,17 +40,19 @@ public class PracticeFormPage {
     ModalWindow modalWindow = new ModalWindow();
     Calendar dateOfBirth = new Calendar();
 
-
+    @Step("Ввести имя")
     public PracticeFormPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
         return this;
     }
 
+    @Step("Ввести фамилию")
     public PracticeFormPage setLastName(String lastName) {
         lastNameInput.setValue(lastName);
         return this;
     }
 
+    @Step("Ввести почту")
     public PracticeFormPage setEmail(String email) {
         emailInput.setValue(email);
         return this;
@@ -59,6 +62,8 @@ public class PracticeFormPage {
         maleCheckbox.click();
         return this;
     }
+
+    @Step("Выбрать пол")
     public PracticeFormPage chooseRandomSex(String gender) {
         {
             sexCheckbox.$(byText(gender)).click();
@@ -66,6 +71,7 @@ public class PracticeFormPage {
         }
     }
 
+    @Step("Ввести номер телефона")
     public PracticeFormPage setNumber(String number) {
         phoneNumber.setValue(number);
         return this;
@@ -78,7 +84,9 @@ public class PracticeFormPage {
         daySelect.click();
         return this;
     }*/
-public PracticeFormPage setRandomDateOfBirth(String year, String month, String day)
+
+    @Step("Ввести дату рождения")
+    public PracticeFormPage setRandomDateOfBirth(String year, String month, String day)
 {
     dateOfBirth.setDateofBirth(year,month,day);
     return this;
@@ -91,6 +99,7 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         hobbyMusicSelect.click();
         return this;
     }
+    @Step("Ввести предмет")
     public PracticeFormPage setSubject(String subject)
     {
         subjectForm.click();
@@ -98,11 +107,13 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         return this;
     }
 
+    @Step("Загрузить фото")
     public PracticeFormPage setImage() {
         imageUpload.uploadFromClasspath("img/1.png");
         return this;
     }
 
+    @Step("Ввести адрес")
     public PracticeFormPage setCurrentAdress(String currentAdress) {
         adressField.setValue(currentAdress);
         return this;
@@ -116,6 +127,8 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         stateCitySelect.$(byText("Karnal")).click();
         return this;
     }
+
+    @Step("Выбрать штат и город")
     public PracticeFormPage setRandomAdress(String state, String city) {
         openStateSelect.click();
         stateCitySelect.$(byText(state)).click();
@@ -124,29 +137,33 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         return this;
     }
 
+    @Step("Нажать на кнопку подтвердить")
     public PracticeFormPage submit() {
         submitButton.click();
         return this;
     }
 
+    @Step("Проверка отображения введенного на форме поля в модальном окне")
     public PracticeFormPage assertsModalWindow(String key, String value) {
         modalDialog.should(appear);
         titleModalDialog.shouldHave(text("Thanks for submitting the form"));
         modalWindow.checkResult(key,value);
         return this;
     }
+    @Step("Проверка отсутствия модального окна")
     public PracticeFormPage assertsModalWindowNotExist() {
         modalDialog.shouldNot(appear);
 //        titleModalDialog.shouldNotHave(text("Thanks for submitting the form"));
         return this;
     }
-
+    @Step("Открыть страницу 'Practice Form'")
     public PracticeFormPage openPracticeForm() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('footer').remove()");
         return this;
     }
+    @Step("Проверка нахождения на нужной странице")
     public PracticeFormPage checkUrl (){
         String currentUrl = WebDriverRunner.url();
         assertEquals("https://demoqa.com/automation-practice-form", currentUrl);
