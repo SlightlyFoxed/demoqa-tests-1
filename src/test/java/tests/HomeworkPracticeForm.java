@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import testData.RandomData;
 
+@DisplayName("Проверка функционала заполнения полей и отправки формы 'Practice Form'")
 public class HomeworkPracticeForm extends TestBase {
 
     RandomData random = new RandomData();
@@ -13,7 +14,6 @@ public class HomeworkPracticeForm extends TestBase {
 
     @Test
     @Tag("demoqa")
-    @DisplayName("Заполнение всей формы")
     @Description("Проверка отправки формы с заполнением всех полей")
     void fillFormText() {
 
