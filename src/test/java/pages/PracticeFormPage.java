@@ -44,6 +44,7 @@ public class PracticeFormPage {
 
     @Step("Ввести имя")
     public PracticeFormPage setFirstName(String firstName) {
+        checkAdsWindowAndCloseIfExist();
         firstNameInput.setValue(firstName);
         checkAdsWindowAndCloseIfExist();
         return this;
@@ -51,14 +52,15 @@ public class PracticeFormPage {
 
     @Step("Ввести фамилию")
     public PracticeFormPage setLastName(String lastName) {
+        checkAdsWindowAndCloseIfExist();
         lastNameInput.setValue(lastName);
         return this;
     }
 
     @Step("Ввести почту")
     public PracticeFormPage setEmail(String email) {
-        emailInput.setValue(email);
         checkAdsWindowAndCloseIfExist();
+        emailInput.setValue(email);
         return this;
     }
 
@@ -70,6 +72,7 @@ public class PracticeFormPage {
     @Step("Выбрать пол")
     public PracticeFormPage chooseRandomSex(String gender) {
         {
+            checkAdsWindowAndCloseIfExist();
             sexCheckbox.$(byText(gender)).click();
             return this;
         }
@@ -77,8 +80,8 @@ public class PracticeFormPage {
 
     @Step("Ввести номер телефона")
     public PracticeFormPage setNumber(String number) {
-        phoneNumber.setValue(number);
         checkAdsWindowAndCloseIfExist();
+        phoneNumber.setValue(number);
         return this;
     }
 
@@ -93,6 +96,7 @@ public class PracticeFormPage {
     @Step("Ввести дату рождения")
     public PracticeFormPage setRandomDateOfBirth(String year, String month, String day)
 {
+    checkAdsWindowAndCloseIfExist();
     dateOfBirth.setDateofBirth(year,month,day);
     return this;
 }
@@ -107,6 +111,7 @@ public class PracticeFormPage {
     @Step("Ввести предмет")
     public PracticeFormPage setSubject(String subject)
     {
+        checkAdsWindowAndCloseIfExist();
         subjectForm.click();
         subjectSelect.setValue(subject).pressEnter();
         return this;
@@ -114,6 +119,7 @@ public class PracticeFormPage {
 
     @Step("Загрузить фото")
     public PracticeFormPage setImage() {
+        checkAdsWindowAndCloseIfExist();
         imageUpload.uploadFromClasspath("img/1.png");
         checkAdsWindowAndCloseIfExist();
         return this;
