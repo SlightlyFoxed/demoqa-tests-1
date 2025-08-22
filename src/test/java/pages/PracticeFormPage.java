@@ -135,6 +135,7 @@ public class PracticeFormPage {
     public PracticeFormPage setCurrentAdress(String currentAdress) {
         checkAdsWindowAndCloseIfExist();
         adressField.setValue(currentAdress);
+        adressField.scrollIntoView(true);
         checkAdsWindowAndCloseIfExist();
         return this;
     }
@@ -151,6 +152,7 @@ public class PracticeFormPage {
     @Step("Выбрать штат и город")
     public PracticeFormPage setRandomAdress(String state, String city) {
         checkAdsWindowAndCloseIfExist();
+
         openStateSelect.click();
         stateCitySelect.$(byText(state)).click();
         openCitySelect.click();
