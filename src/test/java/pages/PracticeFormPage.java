@@ -54,6 +54,7 @@ public class PracticeFormPage {
     public PracticeFormPage setLastName(String lastName) {
         checkAdsWindowAndCloseIfExist();
         lastNameInput.setValue(lastName);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -61,6 +62,7 @@ public class PracticeFormPage {
     public PracticeFormPage setEmail(String email) {
         checkAdsWindowAndCloseIfExist();
         emailInput.setValue(email);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -74,6 +76,7 @@ public class PracticeFormPage {
         {
             checkAdsWindowAndCloseIfExist();
             sexCheckbox.$(byText(gender)).click();
+            checkAdsWindowAndCloseIfExist();
             return this;
         }
     }
@@ -82,6 +85,7 @@ public class PracticeFormPage {
     public PracticeFormPage setNumber(String number) {
         checkAdsWindowAndCloseIfExist();
         phoneNumber.setValue(number);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -98,6 +102,7 @@ public class PracticeFormPage {
 {
     checkAdsWindowAndCloseIfExist();
     dateOfBirth.setDateofBirth(year,month,day);
+    checkAdsWindowAndCloseIfExist();
     return this;
 }
 
@@ -114,6 +119,7 @@ public class PracticeFormPage {
         checkAdsWindowAndCloseIfExist();
         subjectForm.click();
         subjectSelect.setValue(subject).pressEnter();
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -127,7 +133,9 @@ public class PracticeFormPage {
 
     @Step("Ввести адрес")
     public PracticeFormPage setCurrentAdress(String currentAdress) {
+        checkAdsWindowAndCloseIfExist();
         adressField.setValue(currentAdress);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -142,10 +150,12 @@ public class PracticeFormPage {
 
     @Step("Выбрать штат и город")
     public PracticeFormPage setRandomAdress(String state, String city) {
+        checkAdsWindowAndCloseIfExist();
         openStateSelect.click();
         stateCitySelect.$(byText(state)).click();
         openCitySelect.click();
         stateCitySelect.$(byText(city)).click();
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
