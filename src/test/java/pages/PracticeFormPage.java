@@ -75,6 +75,7 @@ public class PracticeFormPage {
     public PracticeFormPage chooseRandomSex(String gender) {
         {
             checkAdsWindowAndCloseIfExist();
+            sexCheckbox.scrollIntoView(true);
             sexCheckbox.$(byText(gender)).click();
             checkAdsWindowAndCloseIfExist();
             return this;
@@ -84,6 +85,7 @@ public class PracticeFormPage {
     @Step("Ввести номер телефона")
     public PracticeFormPage setNumber(String number) {
         checkAdsWindowAndCloseIfExist();
+        phoneNumber.scrollIntoView(true);
         phoneNumber.setValue(number);
         checkAdsWindowAndCloseIfExist();
         return this;
@@ -117,6 +119,7 @@ public class PracticeFormPage {
     public PracticeFormPage setSubject(String subject)
     {
         checkAdsWindowAndCloseIfExist();
+        subjectForm.scrollIntoView(true);
         subjectForm.click();
         subjectSelect.setValue(subject).pressEnter();
         checkAdsWindowAndCloseIfExist();
@@ -126,6 +129,7 @@ public class PracticeFormPage {
     @Step("Загрузить фото")
     public PracticeFormPage setImage() {
         checkAdsWindowAndCloseIfExist();
+        imageUpload.scrollIntoView(true);
         imageUpload.uploadFromClasspath("img/1.png");
         checkAdsWindowAndCloseIfExist();
         return this;
@@ -134,8 +138,8 @@ public class PracticeFormPage {
     @Step("Ввести адрес")
     public PracticeFormPage setCurrentAdress(String currentAdress) {
         checkAdsWindowAndCloseIfExist();
-        adressField.setValue(currentAdress);
         adressField.scrollIntoView(true);
+        adressField.setValue(currentAdress);
         checkAdsWindowAndCloseIfExist();
         return this;
     }
@@ -152,7 +156,7 @@ public class PracticeFormPage {
     @Step("Выбрать штат и город")
     public PracticeFormPage setRandomAdress(String state, String city) {
         checkAdsWindowAndCloseIfExist();
-
+        openStateSelect.scrollIntoView(true);
         openStateSelect.click();
         stateCitySelect.$(byText(state)).click();
         openCitySelect.click();
@@ -164,6 +168,7 @@ public class PracticeFormPage {
     @Step("Нажать на кнопку подтвердить")
     public PracticeFormPage submit() {
         checkAdsWindowAndCloseIfExist();
+        submitButton.scrollIntoView(true);
         submitButton.click();
         return this;
     }
