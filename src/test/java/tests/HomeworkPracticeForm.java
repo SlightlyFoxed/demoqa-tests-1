@@ -30,6 +30,7 @@ public class HomeworkPracticeForm extends TestBase {
                 .setCurrentAdress(random.currentAdress)
                 .setRandomAdress(random.userState,random.userCity)
                 .submit()
+                .checkAdsWindowAndCloseIfExist()
                 .assertsModalWindow("Student Name", random.firstName + " " + random.lastName)
                 .assertsModalWindow("Student Email", random.email)
                 .assertsModalWindow("Gender", random.userSex)
@@ -50,6 +51,7 @@ public class HomeworkPracticeForm extends TestBase {
                 .setFirstName(random.firstName)
                 .setLastName(random.lastName)
                 .setEmail(random.email)
+                .checkAdsWindowAndCloseIfExist()
                 .submit()
                 .assertsModalWindowNotExist();
     }
@@ -64,6 +66,7 @@ public class HomeworkPracticeForm extends TestBase {
                 .setLastName(random.lastName)
                 .chooseRandomSex(random.userSex)
                 .setNumber(random.number)
+                .checkAdsWindowAndCloseIfExist()
                 .submit()
                 .assertsModalWindow("Student Name", random.firstName + " " + random.lastName)
                 .assertsModalWindow("Gender", random.userSex)

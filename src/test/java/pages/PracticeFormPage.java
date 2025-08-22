@@ -35,6 +35,7 @@ public class PracticeFormPage {
     public static SelenideElement stateCitySelect = $("#stateCity-wrapper");
     public static SelenideElement submitButton = $("#submit");
     public static SelenideElement modalDialog = $(".modal-dialog");
+    public static SelenideElement adsWindow = $("img#close_button_svg");
     public static SelenideElement titleModalDialog = $("#example-modal-sizes-title-lg");
     //public static SelenideElement containModalDialog = $(".table-responsive");
     ModalWindow modalWindow = new ModalWindow();
@@ -162,6 +163,13 @@ public class PracticeFormPage {
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+        return this;
+    }
+    @Step("Проверка наличия рекламного баннера и закрытия его")
+    public PracticeFormPage checkAdsWindowAndCloseIfExist() {
+        if(adsWindow.exists()){
+            adsWindow.click();
+        }
         return this;
     }
     @Step("Проверка нахождения на нужной странице")
