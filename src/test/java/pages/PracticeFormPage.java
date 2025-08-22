@@ -174,11 +174,9 @@ public class PracticeFormPage {
     }
     @Step("Проверка наличия рекламного баннера и закрытия его")
     public PracticeFormPage checkAdsWindowAndCloseIfExist() {
-        if(adWindow.exists()){
             executeJavaScript("$('#fixedban').remove()");
             executeJavaScript("$('footer').remove()");
             executeJavaScript("$('#adplus-anchor').remove()");;
-        }
         return this;
     }
     @Step("Проверка нахождения на нужной странице")
