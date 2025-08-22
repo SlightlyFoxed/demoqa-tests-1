@@ -163,6 +163,7 @@ public class PracticeFormPage {
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#adplus-anchor').remove()");
         return this;
     }
     @Step("Проверка наличия рекламного баннера и закрытия его")
