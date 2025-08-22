@@ -36,6 +36,7 @@ public class PracticeFormPage {
     public static SelenideElement submitButton = $("#submit");
     public static SelenideElement modalDialog = $(".modal-dialog");
     public static SelenideElement adsWindow = $("img#close_button_svg");
+    public static SelenideElement adWindow = $("#fixedban");
     public static SelenideElement titleModalDialog = $("#example-modal-sizes-title-lg");
     //public static SelenideElement containModalDialog = $(".table-responsive");
     ModalWindow modalWindow = new ModalWindow();
@@ -44,6 +45,7 @@ public class PracticeFormPage {
     @Step("Ввести имя")
     public PracticeFormPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -56,6 +58,7 @@ public class PracticeFormPage {
     @Step("Ввести почту")
     public PracticeFormPage setEmail(String email) {
         emailInput.setValue(email);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -75,6 +78,7 @@ public class PracticeFormPage {
     @Step("Ввести номер телефона")
     public PracticeFormPage setNumber(String number) {
         phoneNumber.setValue(number);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -111,6 +115,7 @@ public class PracticeFormPage {
     @Step("Загрузить фото")
     public PracticeFormPage setImage() {
         imageUpload.uploadFromClasspath("img/1.png");
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -140,6 +145,7 @@ public class PracticeFormPage {
 
     @Step("Нажать на кнопку подтвердить")
     public PracticeFormPage submit() {
+        checkAdsWindowAndCloseIfExist();
         submitButton.click();
         return this;
     }
@@ -168,8 +174,10 @@ public class PracticeFormPage {
     }
     @Step("Проверка наличия рекламного баннера и закрытия его")
     public PracticeFormPage checkAdsWindowAndCloseIfExist() {
-        if(adsWindow.exists()){
-            adsWindow.click();
+        if(adWindow.exists()){
+            executeJavaScript("$('#fixedban').remove()");
+            executeJavaScript("$('footer').remove()");
+            executeJavaScript("$('#adplus-anchor').remove()");;
         }
         return this;
     }
