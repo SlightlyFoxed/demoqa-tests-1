@@ -16,6 +16,7 @@ public class TestBase {
     public PracticeFormPage practiceFormPage = new PracticeFormPage();
 
 
+
     @BeforeAll
     static void beforeAll() {
         //Configuration.browserSize = "1920x1080";

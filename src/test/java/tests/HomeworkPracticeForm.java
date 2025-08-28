@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import testData.RandomData;
 
 @DisplayName("Проверка функционала заполнения полей и отправки формы 'Practice Form'")
-public class HomeworkPracticeForm extends TestBase {
+public class HomeworkPracticeForm extends RemoteTestBase {
 
     RandomData random = new RandomData();
 
