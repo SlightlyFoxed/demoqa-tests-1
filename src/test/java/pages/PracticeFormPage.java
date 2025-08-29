@@ -132,7 +132,7 @@ public class PracticeFormPage {
     @Step("Загрузить фото")
     public PracticeFormPage setImage() throws URISyntaxException {
 
-        File file = new File(getClass().getClassLoader().getResource("img/1.png").toURI());
+        File file = new File("src/test/resources/img/1.png");
         checkAdsWindowAndCloseIfExist();
         imageUpload.scrollIntoView(true);
         imageUpload.uploadFile(file);

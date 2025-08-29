@@ -43,7 +43,6 @@ public class RemoteTestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
         setupRemote();
-        Configuration.reportsFolder = "build/reports/tests";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
