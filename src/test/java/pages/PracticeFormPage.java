@@ -4,6 +4,9 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 
+import java.io.File;
+import java.net.URISyntaxException;
+
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -127,10 +130,13 @@ public class PracticeFormPage {
     }
 
     @Step("Загрузить фото")
-    public PracticeFormPage setImage() {
+    public PracticeFormPage setImage() throws URISyntaxException {
+
+        File file = new File(getClass().getClassLoader().getResource("img/1.png").toURI());
         checkAdsWindowAndCloseIfExist();
         imageUpload.scrollIntoView(true);
-        imageUpload.uploadFromClasspath("img/1.png");
+        imageUpload.uploadFile(file);
+        //imageUpload.uploadFromClasspath("img/1.png");//В Chrome тесты используют другой способ загрузки файла (например, uploadFile() с абсолютным путём), а в Mozilla — uploadFromClasspath()
         checkAdsWindowAndCloseIfExist();
         return this;
     }

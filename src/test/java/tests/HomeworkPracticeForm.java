@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import testData.RandomData;
 
+import java.net.URISyntaxException;
+
 @DisplayName("Проверка функционала заполнения полей и отправки формы 'Practice Form'")
 public class HomeworkPracticeForm extends RemoteTestBase {
 
@@ -14,7 +16,7 @@ public class HomeworkPracticeForm extends RemoteTestBase {
     @Test
     @Tag("demoqa")
     @DisplayName("Проверка отправки формы с заполнением всех полей")
-    void fillFormText() {
+    void fillFormText() throws URISyntaxException {
 
         practiceFormPage
                 .openPracticeForm()
