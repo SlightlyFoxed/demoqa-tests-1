@@ -1,20 +1,22 @@
 package tests;
 
-import com.github.javafaker.Faker;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.Calendar;
-import pages.PracticeFormPage;
 import testData.RandomData;
 
-import java.util.Locale;
+import java.net.URISyntaxException;
 
-public class HomeworkPracticeForm extends TestBase {
+@DisplayName("Проверка функционала заполнения полей и отправки формы 'Practice Form'")
+public class HomeworkPracticeForm extends RemoteTestBase {
 
     RandomData random = new RandomData();
 
 
     @Test
-    void fillFormText() {
+    @Tag("demoqa")
+    @DisplayName("Проверка отправки формы с заполнением всех полей")
+    void fillFormText() throws URISyntaxException {
 
         practiceFormPage
                 .openPracticeForm()
@@ -41,6 +43,8 @@ public class HomeworkPracticeForm extends TestBase {
 
     }
     @Test
+    @Tag("demoqa")
+    @DisplayName("Проверка отправки формы без заполненных обязательных полей")
     void withoutRequiredFields (){
         practiceFormPage
                 .openPracticeForm()
@@ -52,6 +56,8 @@ public class HomeworkPracticeForm extends TestBase {
                 .assertsModalWindowNotExist();
     }
     @Test
+    @Tag("demoqa")
+    @DisplayName("Проверка отправки формы с заполнением только обязательных полей")
     void onlyRequiredFields (){
         practiceFormPage
                 .openPracticeForm()

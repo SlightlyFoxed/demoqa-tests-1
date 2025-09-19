@@ -2,6 +2,10 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
+
+import java.io.File;
+import java.net.URISyntaxException;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
@@ -34,24 +38,34 @@ public class PracticeFormPage {
     public static SelenideElement stateCitySelect = $("#stateCity-wrapper");
     public static SelenideElement submitButton = $("#submit");
     public static SelenideElement modalDialog = $(".modal-dialog");
+    public static SelenideElement adsWindow = $("img#close_button_svg");
+    public static SelenideElement adWindow = $("#fixedban");
     public static SelenideElement titleModalDialog = $("#example-modal-sizes-title-lg");
     //public static SelenideElement containModalDialog = $(".table-responsive");
     ModalWindow modalWindow = new ModalWindow();
     Calendar dateOfBirth = new Calendar();
 
-
+    @Step("Ввести имя")
     public PracticeFormPage setFirstName(String firstName) {
+        checkAdsWindowAndCloseIfExist();
         firstNameInput.setValue(firstName);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
+    @Step("Ввести фамилию")
     public PracticeFormPage setLastName(String lastName) {
+        checkAdsWindowAndCloseIfExist();
         lastNameInput.setValue(lastName);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
+    @Step("Ввести почту")
     public PracticeFormPage setEmail(String email) {
+        checkAdsWindowAndCloseIfExist();
         emailInput.setValue(email);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -59,15 +73,24 @@ public class PracticeFormPage {
         maleCheckbox.click();
         return this;
     }
+
+    @Step("Выбрать пол")
     public PracticeFormPage chooseRandomSex(String gender) {
         {
+            checkAdsWindowAndCloseIfExist();
+            sexCheckbox.scrollIntoView(true);
             sexCheckbox.$(byText(gender)).click();
+            checkAdsWindowAndCloseIfExist();
             return this;
         }
     }
 
+    @Step("Ввести номер телефона")
     public PracticeFormPage setNumber(String number) {
+        checkAdsWindowAndCloseIfExist();
+        phoneNumber.scrollIntoView(true);
         phoneNumber.setValue(number);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -78,9 +101,13 @@ public class PracticeFormPage {
         daySelect.click();
         return this;
     }*/
-public PracticeFormPage setRandomDateOfBirth(String year, String month, String day)
+
+    @Step("Ввести дату рождения")
+    public PracticeFormPage setRandomDateOfBirth(String year, String month, String day)
 {
+    checkAdsWindowAndCloseIfExist();
     dateOfBirth.setDateofBirth(year,month,day);
+    checkAdsWindowAndCloseIfExist();
     return this;
 }
 
@@ -91,20 +118,35 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         hobbyMusicSelect.click();
         return this;
     }
+    @Step("Ввести предмет")
     public PracticeFormPage setSubject(String subject)
     {
+        checkAdsWindowAndCloseIfExist();
+        subjectForm.scrollIntoView(true);
         subjectForm.click();
         subjectSelect.setValue(subject).pressEnter();
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
-    public PracticeFormPage setImage() {
-        imageUpload.uploadFromClasspath("img/1.png");
+    @Step("Загрузить фото")
+    public PracticeFormPage setImage() throws URISyntaxException {
+
+        File file = new File("src/test/resources/img/1.png");
+        checkAdsWindowAndCloseIfExist();
+        imageUpload.scrollIntoView(true);
+        imageUpload.uploadFile(file);
+        //imageUpload.uploadFromClasspath("img/1.png");//В Chrome тесты используют другой способ загрузки файла (например, uploadFile() с абсолютным путём), а в Mozilla — uploadFromClasspath()
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
+    @Step("Ввести адрес")
     public PracticeFormPage setCurrentAdress(String currentAdress) {
+        checkAdsWindowAndCloseIfExist();
+        adressField.scrollIntoView(true);
         adressField.setValue(currentAdress);
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
@@ -116,37 +158,57 @@ public PracticeFormPage setRandomDateOfBirth(String year, String month, String d
         stateCitySelect.$(byText("Karnal")).click();
         return this;
     }
+
+    @Step("Выбрать штат и город")
     public PracticeFormPage setRandomAdress(String state, String city) {
+        checkAdsWindowAndCloseIfExist();
+        openStateSelect.scrollIntoView(true);
         openStateSelect.click();
         stateCitySelect.$(byText(state)).click();
         openCitySelect.click();
         stateCitySelect.$(byText(city)).click();
+        checkAdsWindowAndCloseIfExist();
         return this;
     }
 
+    @Step("Нажать на кнопку подтвердить")
     public PracticeFormPage submit() {
+        checkAdsWindowAndCloseIfExist();
+        submitButton.scrollIntoView(true);
         submitButton.click();
         return this;
     }
 
+    @Step("Проверка отображения введенного на форме поля в модальном окне")
     public PracticeFormPage assertsModalWindow(String key, String value) {
         modalDialog.should(appear);
         titleModalDialog.shouldHave(text("Thanks for submitting the form"));
         modalWindow.checkResult(key,value);
         return this;
     }
+    @Step("Проверка отсутствия модального окна")
     public PracticeFormPage assertsModalWindowNotExist() {
         modalDialog.shouldNot(appear);
 //        titleModalDialog.shouldNotHave(text("Thanks for submitting the form"));
         return this;
     }
-
+    @Step("Открыть страницу 'Practice Form'")
     public PracticeFormPage openPracticeForm() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#adplus-anchor').remove()");
         return this;
     }
+    @Step("Проверка наличия рекламного баннера и закрытия его")
+    public PracticeFormPage checkAdsWindowAndCloseIfExist() {
+            executeJavaScript("$('#fixedban').remove()");
+            executeJavaScript("$('footer').remove()");
+            executeJavaScript("$('#adplus-anchor').remove()");;
+        return this;
+    }
+    @Step("Проверка нахождения на нужной странице")
     public PracticeFormPage checkUrl (){
         String currentUrl = WebDriverRunner.url();
         assertEquals("https://demoqa.com/automation-practice-form", currentUrl);
